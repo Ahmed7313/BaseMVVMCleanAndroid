@@ -8,7 +8,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class BaseApp : Application()  {
+class BaseMVVMCleanApp : Application()  {
 
     @Inject
     override fun onCreate() {
@@ -25,7 +25,7 @@ class BaseApp : Application()  {
         Logger.init()
     }
     companion object {
-        lateinit var instance: BaseApp
+        lateinit var instance: BaseMVVMCleanApp
         lateinit  var appContext: Context
     }
 }

@@ -2,11 +2,10 @@ package com.aramex.mypos.Domain.UseCases
 
 import com.aramex.mypos.Common.showErrorMsg
 import com.aramex.mypos.Data.remote.DataWrapper.Resource
-import com.example.basemvvmcleanandroid.BaseApp
+import com.example.basemvvmcleanandroid.BaseMVVMCleanApp
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
 import timber.log.Timber
@@ -86,7 +85,7 @@ abstract class BaseUseCase<in P, T>(private val defaultParams: P? = null) {
     }
 
     private fun showError(message: String) {
-        BaseApp.appContext.showErrorMsg(message)
+        BaseMVVMCleanApp.appContext.showErrorMsg(message)
         Timber.tag(TAG).d("Error: $message")
     }
 }
