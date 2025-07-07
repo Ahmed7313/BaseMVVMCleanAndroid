@@ -36,7 +36,6 @@ fun AppHolder(modifier: Modifier = Modifier,
 
 @Composable
 fun AppHolderBox(modifier: Modifier = Modifier,
-              color: Color = Color.White,
               noColor : Boolean = false,
               centerAlignment : Boolean = false,
               view : @Composable ()-> Unit) {
@@ -44,7 +43,6 @@ fun AppHolderBox(modifier: Modifier = Modifier,
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(color = if (noColor) Color.Transparent else color)
             .padding(start = spacing, end = spacing, top = large, bottom = large)
             .verticalScroll(rememberScrollState()),
     ) {

@@ -28,7 +28,6 @@ data class ResponseState (
     val isError: String = "",
 )
 
-
 class OffsetDateTimeAdapter {
     @RequiresApi(Build.VERSION_CODES.O)
     @ToJson

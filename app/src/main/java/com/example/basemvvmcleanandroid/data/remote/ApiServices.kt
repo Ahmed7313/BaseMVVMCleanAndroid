@@ -2,7 +2,7 @@ package com.aramex.mypos.Data.remote
 
 
 
-import com.daman.edman.data.remote.DTO.Login.LoginResponseDTO
+import com.example.basemvvmcleanandroid.data.remote.DTO.Login.LoginDTO
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,8 +14,8 @@ import retrofit2.http.Query
 interface ApiServices {
 
 
-    @POST("auth/login")
+    @POST("api/v1/device/user-login")
     suspend fun login(
         @Body body: RequestBody
-    ): LoginResponseDTO
+    ): LoginDTO
 }

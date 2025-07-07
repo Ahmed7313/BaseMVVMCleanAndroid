@@ -3,7 +3,7 @@ package com.aramex.mypos.Data.remote
 import androidx.compose.runtime.mutableStateOf
 
 object APIConstants {
-    const val BASE_URL_DEV = "https://api.edmneg.com/api/"
+    const val BASE_URL_DEV = "https://seeq-testing.apps.fslabs.net/"
     const val STAGING_URL = ""
     const val LIVE_URL = ""
     const val AUTH_ENDPOINT = "Authorization/"

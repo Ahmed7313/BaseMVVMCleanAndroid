@@ -1,11 +1,11 @@
 package com.aramex.mypos.Domain.ReposInterfaces
 
 
-import com.daman.edman.data.remote.DTO.Login.LoginResponseDTO
+import com.example.basemvvmcleanandroid.data.remote.DTO.Login.LoginDTO
 import okhttp3.RequestBody
 
 interface IRegistrationRepository {
 
-suspend fun login(body: RequestBody) : LoginResponseDTO
+suspend fun login(body: RequestBody) : LoginDTO
 
 }

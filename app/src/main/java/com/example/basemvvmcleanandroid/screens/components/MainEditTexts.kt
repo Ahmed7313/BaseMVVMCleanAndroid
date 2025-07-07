@@ -104,6 +104,9 @@ fun MainEditText(
             unfocusedBorderColor = borderColor,
             focusedTextColor = Color.Black,
             unfocusedTextColor = Color.Black,
+            unfocusedContainerColor = Color.White,
+            focusedContainerColor = Color.White,
+
         ),
         trailingIcon = {
             if (isPassword) {
