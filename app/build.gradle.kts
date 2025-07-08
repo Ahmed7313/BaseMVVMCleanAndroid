@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.camera.view)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -124,6 +125,29 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coil.compose)
 
+    // ML Kit Barcode Scanning
+    implementation (libs.barcode.scanning)
+    //camera
+    implementation (libs.androidx.camera.core.v134)
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.lifecycle.v134)
+    implementation (libs.androidx.camera.view.v134)
+
+    //viewModel lifeCycle
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+
+
+    //json Serialization
+    implementation(libs.kotlinx.serialization.json.v150)
+
+    // CameraX dependencies
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.camera.view)
+// ML Kit Barcode scanning
+    implementation(libs.barcode.scanning.v1700)
+    
     //Sweet Toast
     implementation("com.github.TheHasnatBD:SweetToast:1.0.2") {
         exclude(group = "com.android.support")

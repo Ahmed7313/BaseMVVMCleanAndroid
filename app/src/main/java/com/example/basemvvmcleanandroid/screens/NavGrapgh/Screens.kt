@@ -7,3 +7,6 @@ object LauncherScreen
 
 @Serializable
 object LoginScreen
+
+@Serializable
+object CheckInScanScreen

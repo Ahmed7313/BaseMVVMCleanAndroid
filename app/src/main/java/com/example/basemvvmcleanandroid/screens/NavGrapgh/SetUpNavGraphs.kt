@@ -7,11 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.basemvvmcleanandroid.screens.ScanLogin.CheckInScanScreen
 import com.example.basemvvmcleanandroid.screens.LauncherScreen.LauncherScreen
+import com.example.basemvvmcleanandroid.screens.NavGrapgh.CheckInScanScreen
 import com.example.basemvvmcleanandroid.screens.NavGrapgh.LauncherScreen
 import com.example.basemvvmcleanandroid.screens.NavGrapgh.LoginScreen
 import com.example.basemvvmcleanandroid.screens.login.LoginScreen
-import com.trend.thecontent.data.local.preference.SavePreferences
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -28,5 +29,8 @@ fun SetUpNavGraph (navController : NavHostController, modifier: Modifier = Modif
             LoginScreen(navController)
         }
 
+        composable <CheckInScanScreen>{
+            CheckInScanScreen()
+        }
     }
 }
