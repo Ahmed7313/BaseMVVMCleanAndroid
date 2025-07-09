@@ -8,6 +8,7 @@ import androidx.compose.ui.window.DialogProperties
 
 @Composable
 fun CustomDialog(
+    modifier: Modifier = Modifier,
     showDialog: Boolean,
     onDismissRequest: () -> Unit,
     content: @Composable () -> Unit

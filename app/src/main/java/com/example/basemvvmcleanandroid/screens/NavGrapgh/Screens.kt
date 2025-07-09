@@ -9,4 +9,10 @@ object LauncherScreen
 object LoginScreen
 
 @Serializable
-object CheckInScanScreen
+object ScanLoginScreen
+
+@Serializable
+object SettingsScreen
+
+@Serializable
+object HomeScreen

@@ -8,4 +8,6 @@ interface IRegistrationRepository {
 
 suspend fun login(body: RequestBody) : LoginDTO
 
+suspend fun loginScan(body: RequestBody) : LoginDTO
+
 }

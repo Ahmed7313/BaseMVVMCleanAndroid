@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import com.example.basemvvmcleanandroid.BuildConfig
+import com.example.basemvvmcleanandroid.model.useCases.room.SaveLoginResponseUseCase
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,13 +29,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val useCase: LoginUseCase,
+    private val loginUseCase: LoginUseCase,
     private val preferences: SavePreferences,
+    private val saveLoginResponseUseCase: SaveLoginResponseUseCase
 ) : ViewModel() {
 
-
     private val TAG = "LoginViewModel"
-
 
     private val _state = mutableStateOf(ResponseState())
     val state: State<ResponseState> = _state
@@ -43,48 +43,88 @@ class LoginViewModel @Inject constructor(
     private val _stateFingerPrint = mutableStateOf(ResponseState())
     val stateFingerPrint: State<ResponseState> = _stateFingerPrint
 
-
     val _navigateHome = MutableSharedFlow<Boolean>()
     val navigateHome = _navigateHome.asSharedFlow()
 
     val _navigate = MutableSharedFlow<Boolean>()
     val navigate = _navigate.asSharedFlow()
 
-    private val _isLoadingProgressBar = MutableSharedFlow<Boolean>()
-    val isLoadingProgressBar = _isLoadingProgressBar.asSharedFlow()
-
+    private val _isLoadingProgressBar = MutableStateFlow<Boolean>(false)
+    val isLoadingProgressBar = _isLoadingProgressBar.asStateFlow()
 
     fun login(model: LoginModel) {
-        useCase(createRequestBody(model)).onEach { response ->
+        loginUseCase(createRequestBody(model)).onEach { response ->
             when (response) {
                 is Resource.Loading -> {
-                    Timber.tag(TAG).d("getIntro: loading")
-                    _isLoadingProgressBar.emit(true)
+                    Timber.tag(TAG).d("login: loading")
+                    _isLoadingProgressBar.value = true
+                    _state.value = ResponseState(isLoading = true)
                 }
 
                 is Resource.Success -> {
+                    _isLoadingProgressBar.value = false
+                    _state.value = ResponseState(isLoading = false)
 
-                    _isLoadingProgressBar.emit(false)
+                    Timber.tag(TAG).i("Login successful: ${response.data?.api_token}")
 
-                    Timber.tag(TAG).i(response.data?.api_token)
+                    response.data?.let { loginData ->
+                        // Check if login was successful
+                        if (loginData.api_token.isNotEmpty()) {
+                            // Save to preferences
+                            preferences.putToken(loginData.api_token)
+                            preferences.putOrganizer(loginData.organizer)
 
+                            // Handle event_allowed_types for isSport preference
+                            when (loginData.event_allowed_types) {
+                                "sports" -> preferences.putIsSport(true)
+                                "entertainment" -> preferences.putIsSport(false)
+                                "all" -> preferences.putIsSport(null)
+                            }
 
-                    if (response.data?.api_token?.isEmpty() != true)
-                        _navigate.emit(true)
+                            // Save complete LoginDTO to Room database
+                            viewModelScope.launch {
+                                try {
+                                    saveLoginResponseUseCase(loginData)
+                                    Timber.tag(TAG).d("Login response saved to database")
+                                } catch (e: Exception) {
+                                    Timber.tag(TAG).e(e, "Error saving login response to database")
+                                }
+                            }
+
+                            // Navigate to next screen
+                            _navigate.emit(true)
+                        } else {
+                            // Handle empty token case
+                            _state.value = ResponseState(
+                                isLoading = false,
+                                isError = "Invalid credentials or empty token received"
+                            )
+                            msg.value = "Login failed: Invalid credentials"
+                        }
+                    } ?: run {
+                        // Handle null response data
+                        _state.value = ResponseState(
+                            isLoading = false,
+                            isError = "No response data received"
+                        )
+                        msg.value = "Login failed: No response data"
+                    }
                 }
 
                 is Resource.Error -> {
-                    Timber.tag(TAG).d("getIntro: error")
-                    _isLoadingProgressBar.emit(false)
-                    Timber.tag(TAG).i(response.message)
-                    Timber.tag(TAG).i("Error message set: ${msg.value}")
-
+                    Timber.tag(TAG).e("login: error - ${response.message}")
+                    _isLoadingProgressBar.value = false
+                    _state.value = ResponseState(
+                        isLoading = false,
+                        isError = response.message ?: "Login failed"
+                    )
+                    msg.value = response.message ?: "Login failed"
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun createRequestBody(model : LoginModel): RequestBody {
+    private fun createRequestBody(model: LoginModel): RequestBody {
         val json = JSONObject().apply {
             put("hardware_brand", Build.BRAND)
             put("hardware_model", Build.MODEL)
@@ -97,6 +137,18 @@ class LoginViewModel @Inject constructor(
         }
         return json.toString()
             .toRequestBody("application/json; charset=utf-8".toMediaType())
+    }
+
+    // Clear any error states
+    fun clearError() {
+        _state.value = ResponseState()
+        msg.value = ""
+    }
+
+    // Reset loading state
+    fun resetLoadingState() {
+        _isLoadingProgressBar.value = false
+        _state.value = ResponseState()
     }
 
     data class LoginModel(

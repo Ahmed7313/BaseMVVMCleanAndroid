@@ -42,7 +42,7 @@ fun HeaderText(
     fontSize: Int = 24,
     fontWeight: FontWeight = FontWeight.Medium,
     color: Color = Color.Black,
-    textAlign: TextAlign = TextAlign.Start
+    textAlign: TextAlign = TextAlign.Center
 
 ) {
 
@@ -68,7 +68,7 @@ fun NormalText(
     fontSize: Int = 12,
     fontWeight: FontWeight = FontWeight.Normal,
     color: Color = grayColor,
-    textAlign: TextAlign = TextAlign.Start,
+    textAlign: TextAlign = TextAlign.Center,
     maxLines: Int = Int.MAX_VALUE,
     overflow: TextOverflow = TextOverflow.Visible
 ) {

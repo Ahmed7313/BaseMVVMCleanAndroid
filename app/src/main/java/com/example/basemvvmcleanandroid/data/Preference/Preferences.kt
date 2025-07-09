@@ -39,5 +39,29 @@ interface Preferences {
     fun deleteTokenInfo()
 
 
+    fun putBaseUrl(baseUrl: String)
+
+    fun getBaseUrl(): String
+
+    fun putOrganizer(organizer:String)
+
+    fun getOrganizer(): String
+
+    fun putIsSport(isSport: Boolean?)
+
+    fun getIsSport(): Boolean?
+
+    fun removeIsSport()
+
+    fun putSelectedEventSlug(eventSlug: String)
+
+    fun getSelectedEventSlug(): String
+
+    fun putCheckInListId(checkInListId: Int)
+
+    fun getCheckInListId(): Int
+
+    fun clearSelectedEventData()
+
 
 }

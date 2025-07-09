@@ -23,7 +23,7 @@ class AuthenticationInterceptor @Inject constructor( val preferences: SavePrefer
         val token: String = preferences.getToken() // Retrieve token from DataStore
         val language: String = preferences.getLanguage() // Retrieve language from DataStore
         val newRequest = originalRequest.newBuilder()
-            .header("Authorization", "Bearer $token")
+            .header("Authorization", "Device $token")
             .header("Accept-Language", language)
             .header("Accept", "application/json")
             .build()

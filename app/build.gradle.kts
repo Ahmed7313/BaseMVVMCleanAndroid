@@ -140,16 +140,22 @@ dependencies {
     //json Serialization
     implementation(libs.kotlinx.serialization.json.v150)
 
-    // CameraX dependencies
-    implementation(libs.androidx.camera.core)
-    implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.camera.view)
-// ML Kit Barcode scanning
-    implementation(libs.barcode.scanning.v1700)
-    
+    implementation(libs.gson)
+
+// CameraX
+    implementation("androidx.camera:camera-core:1.3.0")
+    implementation("androidx.camera:camera-camera2:1.3.0")
+    implementation("androidx.camera:camera-lifecycle:1.3.0")
+    implementation("androidx.camera:camera-view:1.3.0")
+// ML Kit Barcode Scanning
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+// Accompanist Permissions
+    implementation("com.google.accompanist:accompanist-permissions:0.34.0")
     //Sweet Toast
     implementation("com.github.TheHasnatBD:SweetToast:1.0.2") {
         exclude(group = "com.android.support")
     }
+
+    implementation(libs.mlkit.barcode.scanning)
+    implementation(libs.camera.mlkit.vision)
 }

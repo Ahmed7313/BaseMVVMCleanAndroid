@@ -27,6 +27,7 @@ import com.daman.edman.screens.components.BorderView
 import com.daman.edman.screens.components.HeaderText
 import com.example.basemvvmcleanandroid.R
 import com.example.basemvvmcleanandroid.screens.NavGrapgh.LoginScreen
+import com.example.basemvvmcleanandroid.screens.NavGrapgh.ScanLoginScreen
 import com.example.basemvvmcleanandroid.ui.theme.GreenColor
 import com.trend.camelx.ui.theme.spacing
 import com.trend.thecontent.screens.components.MainButton
@@ -98,7 +99,7 @@ fun LauncherScreen(
                 if (loginChecked){
                     navController.navigate(LoginScreen)
                 }else{
-
+                    navController.navigate(ScanLoginScreen)
                 }
             }
         }

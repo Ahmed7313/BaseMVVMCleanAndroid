@@ -27,4 +27,8 @@ object PreferencesConstants {
     const val USER_LOCATION_ID = "userLocationId"
     const val USER_LOCATION_NAME = "userLocationName"
 
+    const val ORGANIZER = "organizer"
+
+    const val BASE_URL = "KEY_BASE_URL"
+
 }

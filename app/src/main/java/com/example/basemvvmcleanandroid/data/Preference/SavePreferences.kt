@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.aramex.mypos.Data.Preference.Preferences
 import com.google.gson.Gson
+import com.trend.thecontent.data.local.preference.PreferencesConstants.BASE_URL
 import com.trend.thecontent.data.local.preference.PreferencesConstants.DEFAULT_LANGUAGE
 import com.trend.thecontent.data.local.preference.PreferencesConstants.FIREBASE_TOKEN
 import com.trend.thecontent.data.local.preference.PreferencesConstants.GRANT_TYPE
@@ -120,4 +121,67 @@ class SavePreferences @Inject constructor(
         PreferencesConstants.orderIDNotification.value = 0
         putToken("")
     }
+
+    override fun putBaseUrl(baseUrl: String) {
+        edit { putString(BASE_URL, baseUrl) }
+    }
+
+    override fun getBaseUrl(): String {
+        return preferences.getString(BASE_URL, "").orEmpty()
+    }
+
+    override fun putOrganizer(organizer: String) {
+        edit { putString(PreferencesConstants.ORGANIZER, organizer) }
+    }
+
+    override fun getOrganizer(): String {
+        return preferences.getString(PreferencesConstants.ORGANIZER, "").orEmpty()
+    }
+
+    override fun putIsSport(isSport: Boolean?) {
+        edit {
+            if (isSport != null) {
+                putBoolean("isSport", isSport)
+            } else {
+                remove("isSport") // Remove the key entirely when null
+            }
+        }
+    }
+
+    override fun getIsSport(): Boolean? {
+        return if (preferences.contains("isSport")) {
+            preferences.getBoolean("isSport", false)
+        } else {
+            null // Return null if the key doesn't exist
+        }
+    }
+
+    override fun removeIsSport() {
+        edit { remove("isSport") }
+    }
+
+    // New methods for selected event and checkin list ID
+    override fun putSelectedEventSlug(eventSlug: String) {
+        edit { putString("selected_event_slug", eventSlug) }
+    }
+
+    override fun getSelectedEventSlug(): String {
+        return preferences.getString("selected_event_slug", "").orEmpty()
+    }
+
+    override fun putCheckInListId(checkInListId: Int) {
+        edit { putInt("checkin_list_id", checkInListId) }
+    }
+
+    override  fun getCheckInListId(): Int {
+        return preferences.getInt("checkin_list_id", -1)
+    }
+
+    override  fun clearSelectedEventData() {
+        edit {
+            remove("selected_event_slug")
+            remove("checkin_list_id")
+        }
+    }
+
 }

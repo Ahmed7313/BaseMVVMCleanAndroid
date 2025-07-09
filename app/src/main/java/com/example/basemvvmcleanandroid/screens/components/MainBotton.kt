@@ -41,7 +41,7 @@ fun MainButton(
 
     Button(
         modifier = modifier.height(height).fillMaxWidth(),
-        shape = RoundedCornerShape(spacing),
+        shape = RoundedCornerShape(medium),
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
             contentColor = GreenColor,

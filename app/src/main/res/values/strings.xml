@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BaseMVVMCleanAndroid</string>
+    <string name="scan_tha_code">Scan the Qr Code</string>
+    <string name="share">Share</string>
 </resources>

@@ -1,0 +1,85 @@
+package com.example.basemvvmcleanandroid.data.remote.DTO.EventDTO
+
+
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class Result(
+    @Json(name = "all_sales_channels")
+    val allSalesChannels: Boolean?,
+    @Json(name = "booking_status")
+    val bookingStatus: String?,
+    @Json(name = "categories")
+    val categories: List<Any?>?,
+    @Json(name = "currency")
+    val currency: String?,
+    @Json(name = "date_admission")
+    val dateAdmission: String?,
+    @Json(name = "date_from")
+    val dateFrom: String?,
+    @Json(name = "date_to")
+    val dateTo: String?,
+    @Json(name = "description")
+    val description: Description?,
+    @Json(name = "geo_lat")
+    val geoLat: Any?,
+    @Json(name = "geo_lon")
+    val geoLon: Any?,
+    @Json(name = "has_subevents")
+    val hasSubevents: Boolean?,
+    @Json(name = "is_active")
+    val isActive: Boolean?,
+    @Json(name = "is_public")
+    val isPublic: Boolean?,
+    @Json(name = "is_sport")
+    val isSport: Boolean?,
+    @Json(name = "item_meta_properties")
+    val itemMetaProperties: ItemMetaProperties?,
+    @Json(name = "items")
+    val items: List<Any?>?,
+    @Json(name = "limit_sales_channels")
+    val limitSalesChannels: List<Any?>?,
+    @Json(name = "live")
+    val live: Boolean?,
+    @Json(name = "location")
+    val location: Location?,
+    @Json(name = "logo_image")
+    val logoImage: Any?,
+    @Json(name = "meta_data")
+    val metaData: MetaData?,
+    @Json(name = "name")
+    val name: Name?,
+    @Json(name = "plugins")
+    val plugins: List<String>?,
+    @Json(name = "presale_end")
+    val presaleEnd: String?,
+    @Json(name = "presale_start")
+    val presaleStart: Any?,
+    @Json(name = "public_url")
+    val publicUrl: String?,
+    @Json(name = "sales_channels")
+    val salesChannels: List<String>?,
+    @Json(name = "seat_category_mapping")
+    val seatCategoryMapping: SeatCategoryMapping?,
+    @Json(name = "seating_plan")
+    val seatingPlan: Any?,
+    @Json(name = "seatio_event_key")
+    val seatioEventKey: String?,
+    @Json(name = "slug")
+    val slug: String?,
+    @Json(name = "starting_price")
+    val startingPrice: String?,
+    @Json(name = "teams")
+    val teams: List<Team>?,
+    @Json(name = "terms_and_conditions")
+    val termsAndConditions: Any?,
+    @Json(name = "testmode")
+    val testmode: Boolean?,
+    @Json(name = "timezone")
+    val timezone: String?,
+    @Json(name = "tournament")
+    val tournament: Tournament?,
+    @Json(name = "venue_info")
+    val venueInfo: VenueInfo?
+)
